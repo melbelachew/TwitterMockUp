@@ -18,7 +18,7 @@ public class Tweet {
     private String content;
 
     @NotNull
-    private int posteddate;
+    private String posteddate;
 
     @NotNull
     private String sentby;
@@ -39,11 +39,11 @@ public class Tweet {
         this.content = content;
     }
 
-    public int getPosteddate() {
+    public String getPosteddate() {
         return posteddate;
     }
 
-    public void setPosteddate(int posteddate) {
+    public void setPosteddate(String posteddate) {
         this.posteddate = posteddate;
     }
 
