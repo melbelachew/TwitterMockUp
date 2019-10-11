@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter</title>
+</head>
+<body>
+<a href="/">Show All Tweets</a><br />
+Tweet:<span th:text="${tweet.content}"></span><br/>
+Posted Date:<span th:text="${tweet.posteddate}"></span><br/>
+Author:<span th:text="${tweet.sentby}"></span><br/>
+<a th:href="@{/delete/{id}(id=${tweet.id})}">Delete this tweet</a>
+
+</body>
+</html>

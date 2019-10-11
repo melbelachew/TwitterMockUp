@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter</title>
+</head>
+<body>
+    <h1>Tweet Form</h1>
+    <form action="#" th:action="@{/process}" th:object="${tweet}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        Tweet: <input type="text" th:field="*{content}"/>
+        <span th:if="${#fields.hasErrors('content')}"
+              th:errors="*{content}"></span><br/>
+        Posted Date: <input type="text" th:field="*{posteddate}"/>
+        <span th:if="${#fields.hasErrors('posteddate')}"
+              th:errors="*{posteddate}"></span><br/>
+        Sent By: <input type="text" th:field="*{sentby}"/>
+        <span th:if="${#fields.hasErrors('sentby')}"
+              th:errors="*{sentby}"></span><br/>
+        <input type="submit" value="Submit"/>
+
+
+    </form>
+</body>
+</html>
