@@ -23,6 +23,16 @@ public class Tweet {
     @NotNull
     private String sentby;
 
+    public String getHeadShot() {
+        return headShot;
+    }
+
+    public void setHeadShot(String headShot) {
+        this.headShot = headShot;
+    }
+
+    private String headShot;
+
     public long getId() {
         return id;
     }
@@ -54,4 +64,7 @@ public class Tweet {
     public void setSentby(String sentby) {
         this.sentby = sentby;
     }
+
+
+
 }

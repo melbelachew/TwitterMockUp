@@ -5,13 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import com.cloudinary.utils.ObjectUtils;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class HomeController {
     @Autowired
     TweetRepository tweetRepository;
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
     @RequestMapping("/")
     public String listTweets(Model model){
@@ -26,8 +33,24 @@ public class HomeController {
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid Tweet tweet,
-                              BindingResult result){
+    public String processForm(
+                              @ModelAttribute Tweet tweet,
+
+                              @Valid @RequestParam("file") MultipartFile file, BindingResult result){
+        if(file.isEmpty()){
+            return "redirect:/add";
+        }
+        try {
+            Map uploadResult = cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resoucetype", "auto"));
+            tweet.setHeadShot(uploadResult.get("url").toString());
+            tweetRepository.save(tweet);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/add";
+        }
+
         if(result.hasErrors()){
             return "tweetform";
         }

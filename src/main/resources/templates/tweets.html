@@ -23,6 +23,7 @@
         <td th:text="${tweet.content}"></td>
         <td th:text="${tweet.posteddate}"></td>
         <td th:text="${tweet.sentby}"></td>
+
         <td>
             <a th:href="@{/update/{id}(id=${tweet.id})}">Update</a>
             <a th:href="@{/detail/{id}(id=${tweet.id})}">Details</a>
