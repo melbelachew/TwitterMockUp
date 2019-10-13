@@ -12,24 +12,32 @@
     </div>
 </div>
 <div class="container">
-<a href="/add">Send a tweet</a><br/>
-<table>
+<button type="button" class="btn btn-light"/><a href="/add">Send a tweet</a></button><br/><br/>
+<table class="table">
+    <thead class="thead-light">
     <tr>
-        <th>Tweet</th>
-        <th>Posted Date</th>
-        <th>Author</th>
-    </tr>
-    <tr th:each="tweet: ${tweets}">
+        <th scope="col">Tweet</th>
+        <th scope="col">Posted Date</th>
+        <th scope="col">Author</th>
+        <th scope="col">Image</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+    <th scope="row"></th>
+        <tr th:each="tweet: ${tweets}">
         <td th:text="${tweet.content}"></td>
         <td th:text="${tweet.posteddate}"></td>
         <td th:text="${tweet.sentby}"></td>
+        <td><img th:src="${tweet.headShot}"/></td>
 
         <td>
-            <a th:href="@{/update/{id}(id=${tweet.id})}">Update</a>
-            <a th:href="@{/detail/{id}(id=${tweet.id})}">Details</a>
-            <a th:href="@{/delete/{id}(id=${tweet.id})}">Delete</a>
+            <button type="button" class="btn btn-light"><a th:href="@{/update/{id}(id=${tweet.id})}">Update</a></button>
+            <button type="button" class="btn btn-light"><a th:href="@{/detail/{id}(id=${tweet.id})}">Details</a></button>
+            <button type="button" class="btn btn-light"><a th:href="@{/delete/{id}(id=${tweet.id})}">Delete</a></button>
+
         </td>
     </tr>
+    </tbody>
 </table>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
