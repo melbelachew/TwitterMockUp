@@ -10,6 +10,7 @@ import com.cloudinary.utils.ObjectUtils;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Controller
@@ -25,24 +26,30 @@ public class HomeController {
         model.addAttribute("tweets", tweetRepository.findAll());
         return "tweets";
     }
+    @ModelAttribute
+    LocalDateTime initLocalDate() {
+        return LocalDateTime.now();
+    }
 
     @GetMapping("/add")
     public String tweetform(Model model){
         model.addAttribute("tweet", new Tweet());
+        model.addAttribute("localDateTime", LocalDateTime.now());
         return "tweetform";
     }
 
     @PostMapping("/process")
     public String processForm(
                               @ModelAttribute Tweet tweet,
+                              @ModelAttribute LocalDateTime localDateTime,
 
                               @Valid @RequestParam("file") MultipartFile file, BindingResult result){
         if(file.isEmpty()){
-            return "redirect:/add";
+            return "redirect:/";
         }
         try {
             Map uploadResult = cloudc.upload(file.getBytes(),
-                    ObjectUtils.asMap("resoucetype", "auto"));
+                    ObjectUtils.asMap("resourcetype", "auto"));
             tweet.setHeadShot(uploadResult.get("url").toString());
             tweetRepository.save(tweet);
 

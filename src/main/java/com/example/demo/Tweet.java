@@ -1,11 +1,12 @@
 package com.example.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.awt.event.ActionEvent;
+import java.util.Date;
 
 @Entity
 public class Tweet {
@@ -18,10 +19,19 @@ public class Tweet {
     private String content;
 
     @NotNull
-    private String posteddate;
-
-    @NotNull
     private String sentby;
+
+
+    public Date getPostedDate() {
+        return postedDate;
+    }
+
+    public void setPostedDate(Date postedDate) {
+        this.postedDate = postedDate;
+    }
+
+    @DateTimeFormat(pattern = "dd-MM-YYYY")
+    public Date  postedDate;
 
     public String getHeadShot() {
         return headShot;
@@ -47,14 +57,6 @@ public class Tweet {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getPosteddate() {
-        return posteddate;
-    }
-
-    public void setPosteddate(String posteddate) {
-        this.posteddate = posteddate;
     }
 
     public String getSentby() {
